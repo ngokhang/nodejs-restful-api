@@ -9,10 +9,29 @@
 </head>
 <body>
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+        <a class="active" href="/">Home</a>
+        <a href="/create">Create Users</a>
     </div>
+    
+    <table>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>City</th>
+            </tr>
+            <% listUsers.forEach(function(user) { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.city %></td>
+                    <td>
+                            <a href="/edit/<%= user.id %>">Edit</a>
+                            <a href="/delete">Delete</a>
+                    </td>
+                </tr>
+             <% }); %> 
+    </table>
 </body>
 </html>
