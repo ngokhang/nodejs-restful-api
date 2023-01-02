@@ -20,18 +20,7 @@
                 <th>Username</th>
                 <th>City</th>
             </tr>
-            <% listUsers.forEach(function(user) { %>
-                <tr>
-                    <td><%= user.id %></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.name %></td>
-                    <td><%= user.city %></td>
-                    <td>
-                            <a href="/edit/<%= user.id %>">Edit</a>
-                            <a href="/delete">Delete</a>
-                    </td>
-                </tr>
-             <% }); %> 
+            
     </table>
 </body>
 </html>

@@ -5,8 +5,8 @@ const app = express()
 const port = process.env.PORT;
 const { configViewEngine } = require('./config/viewEngine');
 const { router } = require('./routes/web');
-
 const connection = require('./config/database');
+const Kitten = require('./models/Kitten');
 
 // config req.body
 app.use(express.json())
@@ -18,8 +18,18 @@ configViewEngine(app);
 // use router module
 app.use(router);
 
-connection();
+//create instance of document
+// const cat = new Kitten({ name: 'Meo cua Khang', color: 'Vang' });
+// cat.save();
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+
+(async () => {
+  try {
+    await connection();
+    app.listen(port, () => {
+      console.log(`Your app is listening on port ${port}`)
+    });
+  } catch (error) {
+    console.log(">> Error connect to DB : ", error);
+  }
+})();
