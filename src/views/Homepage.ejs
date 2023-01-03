@@ -19,8 +19,20 @@
                 <th>Email</th>
                 <th>Username</th>
                 <th>City</th>
+                <th>Action</th>
             </tr>
-            
+            <% listUsers.forEach(element => { %>
+                <tr>
+                    <td><%= element._id %> </td>
+                    <td><%= element.email %> </td>
+                    <td><%= element.username %> </td>
+                    <td><%= element.city %> </td>
+                    <td>
+                        <a href="#">Edit</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            <% }) %>
     </table>
 </body>
 </html>

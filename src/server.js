@@ -6,7 +6,6 @@ const port = process.env.PORT;
 const { configViewEngine } = require('./config/viewEngine');
 const { router } = require('./routes/web');
 const connection = require('./config/database');
-const Kitten = require('./models/Kitten');
 
 // config req.body
 app.use(express.json())
@@ -17,11 +16,6 @@ configViewEngine(app);
 
 // use router module
 app.use(router);
-
-//create instance of document
-// const cat = new Kitten({ name: 'Meo cua Khang', color: 'Vang' });
-// cat.save();
-
 
 (async () => {
   try {
