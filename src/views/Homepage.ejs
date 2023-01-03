@@ -28,8 +28,8 @@
                     <td><%= element.username %> </td>
                     <td><%= element.city %> </td>
                     <td>
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
+                        <a href="/update/<%= element._id %> ">Edit</a>
+                        <a href="/delete/<%= element._id %> ">Delete</a>
                     </td>
                 </tr>
             <% }) %>

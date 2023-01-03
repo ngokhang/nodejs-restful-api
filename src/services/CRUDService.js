@@ -1,27 +1,26 @@
-const connection = require('../config/database');
+const User = require('../models/User');
 
 const getAllUsers = async () => {
-    let [results, fiedls] = await connection.query(
-        'select * from Users'
-    );
-    return results;
+    return await User.find({});
 };
 
 const getUserByID = async (userId) => {
-    let sqlQueryGetUserById = 'select * from Users where Users.id = ?';
-    let [results, fields] = await connection.query(sqlQueryGetUserById, [userId]);
-    let user = results && results.length > 0 ? results[0] : {};
-
-    return user;
+    return await User.findById(userId).exec();
 };
 
-const postUpdateInfouser = async (email, username, city, userId) => {
-    let sqlQueryUpdateUser = 'update Users set Users.email = ?, Users.name = ?, Users.city = ? where Users.id = ?';
-    connection.query(sqlQueryUpdateUser, [email, username, city, userId]);
+const postUpdateUser = async (email, username, city, userId) => {
+    await User.updateOne(
+        { _id: userId },
+        {
+            email: email,
+            username: username, 
+            city: city
+        }
+    );
 }
 
 module.exports = {
     getAllUsers,
     getUserByID, 
-    postUpdateInfouser
+    postUpdateUser
 }

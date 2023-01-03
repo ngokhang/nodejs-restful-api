@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm to delete</title>
+</head>
+<body>
+    <h1>Do you want to delete User </h1>
+    <h3><%= userInfo.username %> </h3>
+    <form action="/postDeleteUser/<%= userInfo.id %> " method="post">
+        <button>Yes</button>
+        <button>No</button>
+    </form>
+</body>
+</html>
