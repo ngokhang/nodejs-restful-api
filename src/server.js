@@ -5,6 +5,7 @@ const app = express()
 const port = process.env.PORT;
 const { configViewEngine } = require('./config/viewEngine');
 const { router } = require('./routes/web');
+const routerAPI = require('./routes/api');
 const connection = require('./config/database');
 
 // config req.body
@@ -15,7 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 configViewEngine(app);
 
 // use router module
-app.use(router);
+app.use('/', router);
+app.use('/v1/api', routerAPI);
 
 (async () => {
   try {
