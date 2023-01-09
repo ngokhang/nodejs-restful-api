@@ -6,7 +6,11 @@ const port = process.env.PORT;
 const { configViewEngine } = require('./config/viewEngine');
 const { router } = require('./routes/web');
 const routerAPI = require('./routes/api');
+const fileUpload = require('express-fileupload');
 const connection = require('./config/database');
+
+// use express-fileupload
+app.use(fileUpload());
 
 // config req.body
 app.use(express.json())
