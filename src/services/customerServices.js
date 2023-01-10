@@ -12,7 +12,40 @@ const createNewCustomers = async (customerDataList) => {
     return result;
 }
 
+// GET all customers
+const getCustomers = async () => {
+    let result = await Customer.find({});
+
+    return result;
+}
+
+const updateCustomerById = async (customerId, name, email, address) => {
+    let customer = await Customer.updateOne(
+        { _id: customerId },
+        {
+            name,
+            email,
+            address
+        }
+    );
+
+    return customer;
+};
+
+const deleteCustomer = async (customerID) => {
+    try {
+        let result = await Customer.deleteById(customerID);
+        return result;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
 module.exports = {
     createNewCustomer,
-    createNewCustomers
+    createNewCustomers,
+    getCustomers,
+    updateCustomerById,
+    deleteCustomer
 }

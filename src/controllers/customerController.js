@@ -1,5 +1,5 @@
 const Customer = require('../models/Customer');
-const { createNewCustomer, createNewCustomers } = require('../services/customerServices');
+const { createNewCustomer, createNewCustomers, getCustomers, updateCustomerById, deleteCustomer } = require('../services/customerServices');
 const { uploadSingleFile } = require('../services/fileService');
 
 const postCreateCustomer = async (req, res) => {
@@ -45,7 +45,43 @@ const postCreateArrayCustomer = async (req, res) => {
     }
 }
 
+const getAllCustomers = async (req, res) => {
+    try {
+        let result = await getCustomers();
+
+        return res.status(200).json({
+            EC: 200,
+            data: result
+        })
+    } catch (error) {
+        console.log('>> Error: ', JSON.stringify(error));
+        return res.send('Error');
+    }
+}
+
+const putUpdateCustomerById = async (req, res) => {
+    try {
+        let { customerId, name, email, address } = req.body;
+        let result = await updateCustomerById(customerId, name, email, address);
+        console.log(result);
+        return res.send('OK');
+    } catch (error) {
+        console.log('>> Error: ', JSON.stringify(error));
+        return res.send('Error');
+    }
+};
+
+const deleteCustomerById = async (req, res) => {
+    let { id } = req.body;
+    let result = await deleteCustomer(id);
+    console.log(result);
+    return res.send('OK');
+}
+
 module.exports = {
     postCreateCustomer,
-    postCreateArrayCustomer
+    postCreateArrayCustomer,
+    getAllCustomers,
+    putUpdateCustomerById,
+    deleteCustomerById
 }
