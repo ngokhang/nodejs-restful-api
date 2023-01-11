@@ -40,6 +40,17 @@ const deleteCustomer = async (customerID) => {
         console.log(error);
         return null;
     }
+};
+
+const deleteArrayCustomers = async (arrayID) => {
+    try {
+        if (!Array.isArray(arrayID) || arrayID.length === 0) return null;
+        let result = await Customer.delete({ _id: { $in: arrayID } });
+        return result;
+    } catch (error) {
+        console.log("Error >> ", error);
+        return null;
+    }
 }
 
 module.exports = {
@@ -47,5 +58,6 @@ module.exports = {
     createNewCustomers,
     getCustomers,
     updateCustomerById,
-    deleteCustomer
+    deleteCustomer,
+    deleteArrayCustomers
 }
