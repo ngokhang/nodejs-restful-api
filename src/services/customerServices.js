@@ -13,10 +13,21 @@ const createNewCustomers = async (customerDataList) => {
 }
 
 // GET all customers
-const getCustomers = async () => {
-    let result = await Customer.find({});
+const getCustomers = async (limit, page) => {
+    try {
+        let result = null;
+        if (limit && page) {
+            let offset = (page - 1) * limit;
+            result = await Customer.find({}).skip(offset).limit(limit).exec();
+        } else {
+            result = await Customer.find({});
+        }
 
-    return result;
+        return result;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
 }
 
 const updateCustomerById = async (customerId, name, email, address) => {
@@ -45,7 +56,10 @@ const deleteCustomer = async (customerID) => {
 const deleteArrayCustomers = async (arrayID) => {
     try {
         if (!Array.isArray(arrayID) || arrayID.length === 0) return null;
-        let result = await Customer.delete({ _id: { $in: arrayID } });
+        // soft delete Customer data
+        // let result = await Customer.delete({ _id: { $in: arrayID } });
+        // restore customer data 
+        let result = await Customer.restore();
         return result;
     } catch (error) {
         console.log("Error >> ", error);
