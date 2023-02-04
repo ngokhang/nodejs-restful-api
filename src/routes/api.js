@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAllUsersAPI, postCreateUserAPI, putUpdateUserAPI, deleteUserAPI, postUploadSingleFile, postUploadMutipleFile } = require('../controllers/APIController');
 const { postCreateCustomer, postCreateArrayCustomer, getAllCustomers, putUpdateCustomerById, deleteCustomerById, deleteCustomers } = require('../controllers/customerController');
+const { postCreateNewProject } = require('../controllers/projectController');
 const routerAPI = express.Router();
 
 
@@ -27,6 +28,8 @@ routerAPI.get('/customers', getAllCustomers);
 routerAPI.put('/customer', putUpdateCustomerById);
 routerAPI.delete('/customer', deleteCustomerById);
 routerAPI.delete('/customers', deleteCustomers);
+
+routerAPI.post('/projects', postCreateNewProject);
 
 // API for Query String
 routerAPI.get('/info', (req, res) => {
